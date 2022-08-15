@@ -1,0 +1,5 @@
+﻿in_Config("Max_Retries")
+in_Config("LogMessage_Success")
+in_Config("LogMessage_BusinessRuleException")
+in_Config("LogMessage_ApplicationException")
+in_Config("ExScreenshotsFolderPath")

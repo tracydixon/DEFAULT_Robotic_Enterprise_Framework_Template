@@ -1,0 +1,390 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Global_Handler" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" 
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" 
+xmlns:s="clr-namespace:System;assembly=mscorlib" 
+xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" 
+xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" 
+xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" 
+xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" 
+xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" 
+xmlns:ui="http://schemas.uipath.com/workflow/activities" 
+xmlns:uico="http://schemas.uipath.com/workflow/activities/contracts" 
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="errorInfo" Type="InArgument(uico:ExceptionHandlerArgs)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+    <x:Property Name="result" Type="OutArgument(uico:ErrorAction)">
+      <x:Property.Attributes>
+        <RequiredArgumentAttribute />
+      </x:Property.Attributes>
+    </x:Property>
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>957,856</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>GlobalHandler_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Activities.Contracts</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldCollapseAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence sap2010:Annotation.AnnotationText="Description&#xD;&#xA;Global handler that takes care of errors across the full process.&#xD;&#xA;&#xD;&#xA;Pre-Condition&#xD;&#xA;An error condition has occurred.&#xD;&#xA;&#xD;&#xA;Post-Condition&#xD;&#xA;Errors handled in the global handler have been dealth with.&#xD;&#xA;&#xD;&#xA;Arguments&#xD;&#xA;xxx&#xD;&#xA;&#xD;&#xA;Calls&#xD;&#xA;n/a&#xD;&#xA;&#xD;&#xA;Called By &#xD;&#xA;Exceptions in any part of the process." DisplayName="Global_Handler" sap:VirtualizedContainerService.HintSize="200,423" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="answer" />
+      <Variable x:TypeArguments="x:Int32" Name="retryCount" />
+      <Variable x:TypeArguments="x:String" Name="errorMessage" />
+      <Variable x:TypeArguments="ss:SecureString" Name="password" />
+      <Variable x:TypeArguments="x:String" Name="userName" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="config" />
+      <Variable x:TypeArguments="x:String" Name="accessToken" />
+      <Variable x:TypeArguments="x:String" Name="cDrive" />
+      <Variable x:TypeArguments="s:DateTime" Name="endDate" />
+      <Variable x:TypeArguments="s:DateTime" Name="startDateTime" />
+      <Variable x:TypeArguments="x:String" Name="mailBody" />
+      <Variable x:TypeArguments="x:String" Name="mailTo" />
+      <Variable x:TypeArguments="x:String" Name="mailSubject" />
+      <Variable x:TypeArguments="x:String" Name="startDate" />
+      <Variable x:TypeArguments="x:String" Name="fullBody" />
+      <Variable x:TypeArguments="x:Int32" Name="maxRetries" />
+      <Variable x:TypeArguments="x:String" Name="exceptionDescription" />
+      <Variable x:TypeArguments="x:String" Name="failedActivity" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log error" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Exception: &quot; + now.ToString + vbNewLine + errorInfo.Exception.ToString]" />
+    <Assign DisplayName="Use full message" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[errorMessage]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[errorInfo.Exception.message]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Parallel DisplayName="Global_Handler prep &amp; pop up handling" sap:VirtualizedContainerService.HintSize="2022,106" sap2010:WorkflowViewState.IdRef="Parallel_1">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:LogMessage DisplayName="Log error message" sap:VirtualizedContainerService.HintSize="200,60" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Error message: '&quot; + errorInfo.Exception.message.ToString + &quot;'&quot;]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <Assign DisplayName="Default retry max" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[maxRetries]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">3</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Get exception description" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[exceptionDescription]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[left(errorInfo.Exception.ToString, instr(mid(errorInfo.Exception.ToString, instr(errorInfo.Exception.ToString, ";")+1), ".") +  instr(errorInfo.Exception.ToString, ";"))]</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+      <ui:LogMessage DisplayName="Log retry count" sap:VirtualizedContainerService.HintSize="200,60" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[&quot;Retry count: &quot; + retryCount.ToString]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <ui:LogMessage DisplayName="Log error" sap:VirtualizedContainerService.HintSize="200,60" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Source: &quot; + errorInfo.Exception.Source + vbNewLine + &quot;Error:&quot; + errorInfo.Exception.ToString]" />
+      <Assign DisplayName="Assign retrycount" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[retryCount]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">[errorInfo.RetryCount]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign DisplayName="Assign failed activity info" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[failedActivity]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[errorInfo.ActivityInfo.Name]</InArgument>
+        </Assign.Value>
+      </Assign>
+    </Parallel>
+    <Switch x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Decide what will be done next&#xA;&#xA;Continue - the exception will be re-thrown (and the local try/catch will be executed)&#xA;&#xA;Ignore - The exception will be  ignored and the execution will continue with the next activity after the one which threw the exception&#xA;&#xA;Retry - Re-execute the activity which threw the exception&#xA;&#xA;Abort - The execution will stop" DisplayName="Handle exception by type" Expression="[errorMessage]" sap:VirtualizedContainerService.HintSize="262,318" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+      <Switch.Default>
+        <Sequence DisplayName="Default exception handling" sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Rethrow the error (so processing will skip)" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+            <Assign.To>
+              <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+            </Assign.Value>
+          </Assign>
+        </Sequence>
+      </Switch.Default>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign x:Key="Collection was modified; enumeration operation may not execute." DisplayName="Retry collection bug" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_11">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.retry]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign x:Key="Cannot select item. It was not found among existing items." DisplayName="Retry missing selection" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_12">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign x:Key="Activity timeout exceeded" DisplayName="Rethrow the error (so processing will skip)" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_13">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign x:Key="The UiElement is not initialized" DisplayName="Rethrow the error (so processing will skip)" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign x:Key="Collection was modified after the enumerator was instantiated." DisplayName="Retry collection bug" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.retry]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <If x:Key="Stop." Condition="[errorinfo.RetryCount &lt;= maxRetries]" DisplayName="Retry up to max retries" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="Log retry count and update result" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log retry count" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Error" Message="[&quot;Retry count: &quot; + errorinfo.RetryCount.ToString]" />
+            <Assign DisplayName="Retry " sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_16">
+              <Assign.To>
+                <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.retry]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Update error to ignore" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Continue as past max retry" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_17">
+              <Assign.To>
+                <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Else>
+      </If>
+      <Assign x:Key="Lost data access." DisplayName="Rethrow the error (so processing will skip)" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign x:Key="The operation has timed out." DisplayName="Retry missing selection" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_19">
+        <Assign.To>
+          <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Retry]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Sequence x:Key="The message filter indicated that the application is busy. (Exception from HRESULT: 0x8001010A (RPC_E_SERVERCALL_RETRYLATER))" DisplayName="Retry Outlook " sap:VirtualizedContainerService.HintSize="304,422" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Delay Duration="00:00:10" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+        <Assign DisplayName="Retry missing selection" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_20">
+          <Assign.To>
+            <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Retry]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <If sap2010:Annotation.AnnotationText="TRUE = retry has already happened one time, so kill outlook&#xA;&#xA;FALSE = retry has not already happened one time, do nothing" Condition="[errorinfo.RetryCount &gt; 1]" DisplayName="Kill outlook" sap:VirtualizedContainerService.HintSize="484,265" sap2010:WorkflowViewState.IdRef="If_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="Kill Process" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="outlook.exe" />
+          </If.Then>
+        </If>
+      </Sequence>
+    </Switch>
+    <If sap2010:Annotation.AnnotationText="TRUE = action chosen to retry the error, review max count.&#xA;&#xA;FALSE = action not retried, do nothing." Condition="[result = ErrorAction.Retry]" DisplayName="Handle retry" sap:VirtualizedContainerService.HintSize="262,138" sap2010:WorkflowViewState.IdRef="If_4">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <If sap2010:Annotation.AnnotationText="TRUE = if the retry count is less than or equal to 3, retry.&#xA;&#xA;FALSE = if the retry count is greater than 3, continue with the error." Condition="[errorinfo.RetryCount &lt;= 3]" DisplayName="Retry or continue" sap:VirtualizedContainerService.HintSize="507,532" sap2010:WorkflowViewState.IdRef="If_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence DisplayName="Retry" sap:VirtualizedContainerService.HintSize="304,519" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap2010:Annotation.AnnotationText="Choose the action to be taken when an error is ecountered during execution: &#xA;&#xA;Continue - The execution runs the Global Handler and re-throws the error.&#xA;&#xA;Ignore - The execution runs the Global Handler, ignores the error, and continues from the next activity.&#xA;&#xA;Retry - The execution runs the Global Handler and attempts to retry executing the activity which threw the error.&#xA;&#xA;Abort - The execution stops upon encountering the error and the Global Handler doesn't step in." DisplayName="Choose Next Behavior" sap:VirtualizedContainerService.HintSize="262,327" sap2010:WorkflowViewState.IdRef="Assign_21">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Retry]</InArgument>
+                </Assign.Value>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Assign>
+              <Assign DisplayName="Increment retry count" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_22">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[retryCount]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[retryCount + 1]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Assign sap2010:Annotation.AnnotationText="Choose the action to be taken when an error is ecountered during execution: &#xA;&#xA;Continue - The execution runs the Global Handler and re-throws the error.&#xA;&#xA;Ignore - The execution runs the Global Handler, ignores the error, and continues from the next activity.&#xA;&#xA;Retry - The execution runs the Global Handler and attempts to retry executing the activity which threw the error.&#xA;&#xA;Abort - The execution stops upon encountering the error and the Global Handler doesn't step in." DisplayName="Choose Next Behavior" sap:VirtualizedContainerService.HintSize="262,327" sap2010:WorkflowViewState.IdRef="Assign_23">
+              <Assign.To>
+                <OutArgument x:TypeArguments="uico:ErrorAction">[result]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="uico:ErrorAction">[ErrorAction.Continue]</InArgument>
+              </Assign.Value>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Assign>
+          </If.Else>
+        </If>
+      </If.Then>
+    </If>
+  </Sequence>
+</Activity>

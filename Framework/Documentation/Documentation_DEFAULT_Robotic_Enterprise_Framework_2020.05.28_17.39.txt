@@ -1,0 +1,62 @@
+﻿_Test--------------------------------------------------------------------------Descriptionn/aArgumentsn/aVariablesn/aCallsn/aCalled Byn/aExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Startn/aLog Endn/a
+Framework\Close_All_Applications--------------------------------------------------------------------------Description: Here all working applications will be soft closedArgumentsn/aVariablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessFramework\Set_Transaction_StatusExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Framework\Get_App_Credentials--------------------------------------------------------------------------Descriptionn/aArgumentsout_Username, Out_Argument(String)
+    in_Credential, In_Argument(String)
+    out_Password, Out_Argument(sSecureString)VariablesString, stringPassword
+                  Boolean, credentialFoundCallsn/aCalled Byn/aExceptions'Credentials not supplied'Business Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Framework\Get_Transaction_Data--------------------------------------------------------------------------Description: Get data from spreadsheets, databases, email, web API or UiPath server queues. If no new data, set out_TransactionItem to Nothing. &#xD;Argumentsin_TransactionNumber, In_Argument(Int32)
+    in_Config, In_Argument(Dictionary(String, Object))
+    out_TransactionItem, Out_Argument(ui:QueueItem)
+    out_TransactionField1, Out_Argument(String)
+    out_TransactionField2, Out_Argument(String)
+    out_TransactionID, Out_Argument(String)
+    io_TransactionData, InOut_Argument(DataTable)Variablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArgument Dictionary Referencesn/aLog Start Entryn/aLog End Entryn/a
+Framework\Init_All_Applications--------------------------------------------------------------------------Description: Open and initialize application as needed.Argumentsin_Config, In_Argument(Dictionary(String, Object))Variablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArgument Dictionary Referencesn/aLog Start Entryn/aLog End Entryn/a
+Framework\Init_All_Settings--------------------------------------------------------------------------Descriptionn/aArgumentsin_ConfigFile, In_Argument(String)
+    in_ConfigSheets, In_Argument(String[])
+    out_Config, Out_Argument(Dictionary(String, Object))VariablesDataTable, configTable
+            DataTable, assets
+                        GenericValue, assetValueCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArgument Dictionary Referencesn/aLog Start Entryn/aLog End Entryn/a
+Framework\Kill_All_Processes--------------------------------------------------------------------------Description: Here all working processes will be killedArgumentsn/aVariablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessFramework\Set_Transaction_StatusExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Framework\Set_Transaction_Status--------------------------------------------------------------------------Descriptionn/aArgumentsin_Config, In_Argument(Dictionary(String, Object))
+    in_SystemError, In_Argument(Exception)
+    in_BusinessRuleException, In_Argument(ui:BusinessRuleException)
+    in_TransactionItem, In_Argument(ui:QueueItem)
+    io_RetryNumber, InOut_Argument(Int32)
+    io_TransactionNumber, InOut_Argument(Int32)
+    in_TransactionField1, In_Argument(String)
+    in_TransactionField2, In_Argument(String)
+    in_TransactionID, In_Argument(String)VariablesBoolean, queueRetryCallsFramework\Take_ScreenshotFramework\Kill_All_ProcessesFramework\Close_All_ApplicationsCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArgument Dictionary Referencesin_Config("Max_Retries")in_Config("LogMessage_Success")in_Config("LogMessage_BusinessRuleException")in_Config("LogMessage_ApplicationException")in_Config("ExScreenshotsFolderPath")Log Start Entryn/aLog End Entryn/a
+Framework\Take_Screenshot--------------------------------------------------------------------------Descriptionn/aArgumentsin_Folder, In_Argument(String)
+    io_FilePath, InOut_Argument(String)VariablesImage, screenshot
+      si:FileInfo, screenshotFileInfoCallsn/aCalled ByFramework\Set_Transaction_StatusExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Global_Handler--------------------------------------------------------------------------Descriptionn/aArgumentserrorInfo, In_Argument(ExceptionHandlerArgs)
+    result, Out_Argument(ErrorAction)VariablesString, answer
+      Int32, Default=0, retryCallsn/aCalled Byn/aExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Main--------------------------------------------------------------------------Descriptionn/aArgumentsOrchestratorQueueName, In_Argument(String)VariablesBoolean, ShouldStop
+      QueueItem, TransactionItem
+      Exception, SystemError
+      BusinessRuleException, BusinessRuleException
+      Int32, Default=1, TransactionNumber
+      Dictionary(String, Object), Config
+      Int32, Default=0, RetryNumber
+      String, TransactionField2
+      String, TransactionField1
+      String, TransactionID
+      DataTable, TransactionDataCallsProcess\ProcessProcess\Post_Tech_Exception_ProcessProcess\Post_Success_ProcessProcess\Post_BRException_ProcessFramework\Set_Transaction_StatusFramework\Kill_All_ProcessesFramework\Init_All_SettingsFramework\Init_All_ApplicationsFramework\Get_Transaction_DataFramework\Close_All_ApplicationsCalled Byn/aExceptionsn/aBusiness Rule Exceptionsn/aVariable Dictionary Referencesn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Process\Post_BRException_Process--------------------------------------------------------------------------Descriptionn/aArgumentsn/aVariablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Process\Post_Success_Process--------------------------------------------------------------------------Descriptionn/aArgumentsn/aVariablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Process\Post_Tech_Exception_Process--------------------------------------------------------------------------Descriptionn/aArgumentsOrchestratorQueueName, In_Argument(String)VariablesBoolean, ShouldStop
+      QueueItem, TransactionItem
+      Exception, SystemError
+      BusinessRuleException, BusinessRuleException
+      Int32, Default=1, TransactionNumber
+      Dictionary(String, Object), Config
+      Int32, Default=0, RetryNumber
+      String, TransactionField2
+      String, TransactionField1
+      String, TransactionID
+      DataTable, TransactionDataCallsProcess\ProcessProcess\Post_Success_ProcessProcess\Post_BRException_ProcessFramework\Set_Transaction_StatusFramework\Kill_All_ProcessesFramework\Init_All_SettingsFramework\Init_All_ApplicationsFramework\Get_Transaction_DataFramework\Close_All_ApplicationsCalled ByMainExceptionsn/aBusiness Rule Exceptionsn/aVariable Dictionary Referencesn/aArg Dictionary Callsn/aLog Start Entryn/aLog End Entryn/a
+Process\Process--------------------------------------------------------------------------Descriptionn/aArgumentsin_TransactionItem, In_Argument(ui:QueueItem)
+    in_Config, In_Argument(Dictionary(String, Object))Variablesn/aCallsn/aCalled ByMainProcess\Post_Tech_Exception_ProcessExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArgument Dictionary Referencesn/aLog Start Entryn/aLog End Entryn/a
+Test_Framework\Run_All_Tests--------------------------------------------------------------------------Descriptionn/aArgumentsn/aVariablesn/aCallsn/aCalled Byn/aExceptionsn/aBusiness Rule Exceptionsn/aVar Dictionary Callsn/aArg Dictionary Callsn/aLog Startn/aLog Endn/a
